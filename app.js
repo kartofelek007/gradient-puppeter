@@ -37,7 +37,9 @@ app.post('/', async (req, res) => {
         }
 
         const browser = await puppeteer.launch({
-            headless: "new"
+            executablePath: '/usr/bin/chromium',
+            headless: "new",
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
         const page = await browser.newPage();
