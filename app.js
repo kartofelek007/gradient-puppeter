@@ -46,8 +46,8 @@ app.post('/', async (req, res) => {
         await page.goto(`file://${__dirname}/server.html`, {waitUntil: 'domcontentloaded'});
         
         let devicePixelRatio = data.devicePixelRatio || 1;
-        let width = data.width || 1024;
-        let height = data.height || 768;
+        let width = parseInt(data.width) || 1024;
+        let height = parseInt(data.height) || 768;
 
         await page.setViewport({
             width: width,
