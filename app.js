@@ -7,6 +7,10 @@ const axios = require('axios');
 app.use(cors())
 app.use(express.json());
 
+app.get('/', async (req, res) => {
+    res.send("( ͡° ͜ʖ ͡°)");
+});
+
 //get json post
 app.post('/', async (req, res) => {
     if (req.body && req.body.gradients) {
