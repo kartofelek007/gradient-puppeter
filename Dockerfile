@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:18.16.0
+FROM node
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
      chromium \
