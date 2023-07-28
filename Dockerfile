@@ -5,6 +5,8 @@ FROM node:18
 WORKDIR .
 
 # Install the application dependencies
+WORKDIR /usr/app
+COPY ./ /usr/app
 RUN npm install
 
 # Define the entry point for the container
