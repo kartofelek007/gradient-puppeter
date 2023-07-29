@@ -14,6 +14,9 @@ WORKDIR /usr/src/app
 # Copy package.json
 COPY package.json ./
 
+RUN node -v
+RUN npm -v
+
 # Install NPM dependencies for function
 RUN npm install
 
