@@ -25,7 +25,7 @@ COPY package.json ./
 RUN npm install
 
 # Copy handler function and tsconfig
-COPY server.js ./
+COPY app.js ./
 
 # Expose app
 EXPOSE 3000
