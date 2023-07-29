@@ -1,18 +1,20 @@
 # Filename: Dockerfile
 
-FROM node:slim
-
-# We don't need the standalone Chromium
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+FROM jrei/systemd-ubuntu:20.04
 
 # Install Google Chrome Stable and fonts
 # Note: this installs the necessary libs to make the browser work with Puppeteer.
-RUN apt-get update && apt-get install gnupg wget -y && \
-    wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg && \
-    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-    apt-get update && \
-    apt-get install google-chrome-stable -y --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
+# ENV TZ=Europe/Poland
+# RUN echo "Preparing geographic area ..."
+# RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update
+RUN apt-get install curl -y
+RUN curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
+RUN rm google-chrome-stable_current_amd64.deb
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y nodejs
 
 # FROM public.ecr.aws/lambda/nodejs:14.2022.09.09.11
 # Create working directory
@@ -26,9 +28,10 @@ RUN npm install
 
 # Copy handler function and tsconfig
 COPY app.js ./
+COPY server.html ./
 
 # Expose app
-EXPOSE 3000
+EXPOSE 8080
 
 # Run app
 CMD ["node", "app.js"]

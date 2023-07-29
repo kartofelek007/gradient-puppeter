@@ -37,14 +37,14 @@ app.post('/', async (req, res) => {
         }
 
         const browser = await puppeteer.launch({
-            executablePath: '/usr/bin/chromium',
+            //executablePath: '/usr/bin/chromium-browser',
             headless: "new",
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
         const page = await browser.newPage();
         await page.goto(`file://${__dirname}/server.html`, {waitUntil: 'domcontentloaded'});
-        
+
         let devicePixelRatio = data.devicePixelRatio || 1;
         let width = parseInt(data.width) || 1024;
         let height = parseInt(data.height) || 768;
@@ -79,4 +79,4 @@ app.post('/', async (req, res) => {
     res.sendStatus(404);
 });
 
-app.listen(3000, () => console.log(`Started server at http://localhost:3000`));
+app.listen(8080, () => console.log(`Started server at http://localhost:8080`));
