@@ -31,4 +31,4 @@ COPY server.js ./
 EXPOSE 3000
 
 # Run app
-CMD ["node", "server.js"]
+CMD ["node", "app.js"]
