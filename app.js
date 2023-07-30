@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const puppeteer = require('puppeteer');
 const axios = require('axios');
+const port = process.env.PORT || 3001;
 
 app.use(cors())
 app.use(express.json());
@@ -79,4 +80,4 @@ app.post('/', async (req, res) => {
     res.sendStatus(404);
 });
 
-app.listen(8080, () => console.log(`Started server at http://localhost:8080`));
+app.listen(port, () => console.log(`Started server at http://localhost:${port}`));
